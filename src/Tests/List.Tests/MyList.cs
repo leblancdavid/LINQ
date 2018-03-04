@@ -31,6 +31,17 @@ namespace List.Tests
         }
 
         [Fact]
+        public void All42()
+        {
+            var myList = new MyList<int>(new List<int>()
+            {
+                42, 42, 42
+            });
+
+            myList.All(x => x == 42).Should().BeTrue();
+        }
+
+        [Fact]
         public void SelectShouldMapToSomething()
         {
             var myList = new MyList<int>(new List<int>()
@@ -42,6 +53,20 @@ namespace List.Tests
             myStringList.Count.Should().Be(5);
             myStringList[0].Should().Be("1");
             myStringList[4].Should().Be("5");
-        }    
+        }
+
+        [Fact]
+        public void WhereShouldFilterStuff()
+        {
+            var myList = new MyList<int>(new List<int>()
+            {
+                2, 4, 6, 9, 17, 33, 42
+            });
+
+            var filteredList = myList.Where(x => x % 2 == 0);
+            filteredList.Count.Should().Be(4);
+            filteredList[0].Should().Be(2);
+            filteredList[3].Should().Be(42);
+        }     
     }
 }

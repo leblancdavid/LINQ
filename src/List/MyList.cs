@@ -49,6 +49,20 @@ namespace MyCollection
             return selectList;
         }
 
+        public MyList<T> Where(Func<T, bool> predicate)
+        {
+            var filteredList = new MyList<T>();
+            foreach(var item in _list)
+            {
+                if(predicate.Invoke(item))
+                    filteredList.Add(item);
+            }
+            return filteredList;
+        }
+
+
+
+
         #region List methods
         public void Add(T obj) => _list.Add(obj);
         public void Remove(T obj) => _list.Remove(obj);
